@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ title }}</title>
+  <link rel='stylesheet' href='/css/style.css'/>
+  <script src="js/rotate.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <a href="/"><img class="logo animated rotation" id="testLogo" src="/images/projectiq_noshadow.png"></a>
+      <div class="menu">
+        <table>
+          <tr>
+            <td>
+              <a class="menuEntry slideDown" href="about/" id="idAbout">About us</a>
+            </td>
+            <td>
+              <a class="menuEntry slideDown" href="contact/" id="idContact">Contact</a>
+            </td>
+            <td>
+              <a class="menuEntry slideDown" href="login/" id="login">{{ login  }}</a>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="bgColor">
+  <img class="bg" src="/images/intro.jpg">
+  <table class="textTable sldideUp">
+    <tr>
+      <td>
+        <div class="welcomeMessage slideUp">
+        
+          <img class="iq" src="/images/projectiq.png">
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p class="slideUp">Welcome to {{ title }}</p>
+      </td>
+    </tr>
+  </table>
+  </div>
+  </div>
+</body>
+<footer class="footer">Copyright by Fredrik</footer>
+
+</html>

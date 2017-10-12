@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <link rel="icon" src="/images/projectiq.png">
+</head>
+
+<body>
+        <div class="header">
+            <a href="/"><img class="logo rotate" src="/images/projectiq_noshadow.png"></a>
+            <div class="smallWrapper">
+                <div class="menu">
+                    <table>
+                        <tr>
+                            <td>
+                                <a class="menuEntry slideDown" href="/about/" id="idAbout">About us</a>
+                            </td>
+                            <td>
+                                <a class="menuEntry" href="/contact/" id="idContact">Contact</a>
+                            </td>
+                            <td>
+                                <a class="menuEntry" href="/login/" id="login">Login</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <table class="textTable">
+                <tr>
+                    <td>
+                            <h1></h1>
+                        <h2 class="welcomeMessage">{{ title }}</h2>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <form class="loginForm" method="post" action="/redirect">
+                            <input type="text" name="email" placeholder="E-Mail" value="" size="35">
+                            <br>
+                            <input type="password" name="password" placeholder="Password" value="" size="35"><br>
+                            <input class="loginButton" type="submit" value="Login" size="35">
+                        </form>
+                    </td>
+                </tr>
+                <table class="subMenu">
+                    <tr>
+                        <td>
+                            <a class="loginOptions" href="register/">Create account</a>
+                        </td>
+                        <td style="width:12%;">
+                            |
+                        </td>
+                        <td>
+                            <a class="loginOptions" href="forgot">Forgot password?</a>
+                        </td>
+                    </tr>
+                </table>
+            </table>
+        </div>
+    </div>
+</body>
+<footer class="footer">Copyright by Fredrik</footer>
+
+</html>

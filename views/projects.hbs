@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <script src="js/rotate.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <a href="/user/profile/">
+            <img class="logo animated rotation" id="testLogo" src="/images/projectiq_noshadow.png">
+        </a>
+        <div class="menu">
+            <table>
+                <tr>
+                    <td>
+                        <a class="menuEntry slideDown" href="/user/addProject/" id="idAbout">Add projects</a>
+                    </td>
+                    <td>
+                        <a class="menuEntry slideDown" href="/user/projects/" id="idProjects">Projects</a>
+                    </td>
+                    <td>
+                        <a class="menuEntry slideDown" href="/user/logout/" id="logout">{{ login }}</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </div>
+    <div class="bgColor">
+        <img class="bg" src="/images/intro.jpg">
+        <table class="textTable sldideUp">
+            <tr>
+                <td>
+                    <div class="welcomeMessage slideUp">
+
+                        <img class="iq" src="/images/projectiq.png">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <table class="projectsTable">
+                    <thead class="projectsHead">
+                        <th class="projectsHead">Name</th>
+                        <th class="projectsHead">Sign Date</th>
+                        <th class="projectsHead">Deadline</th>
+                        <th class="projectsHead">Customer</th>
+                        <th class="projectsHead">Budget</th>
+                        <th class="projectsHead">Delivery</th>
+                        <th class="projectsHead">Purpose and goal</th>
+                        <th class="projectsHead">Team</th>
+                        <th class="projectsHead">Technology</th>
+                    </thead>
+                    <tbody class="projectsBody">
+                        {{# each projects }}
+                        <tr>
+                            <td>{{ this.name }}</td>
+                            <td>{{ this.signDate }}</td>
+                            <td>{{ this.deadline }}</td>
+                            <td>{{ this.customer }}</td>
+                            <td>{{ this.budget }}</td>
+                            <td>{{ this.delivery }}</td>
+                            <td>{{ this.purpose }}</td>
+                            <td>{{ this.team }}</td>
+                            <td>{{ this.technology }}</td>
+                        </tr>
+                        {{/each }}
+                    </tbody>
+                </table>
+            </tr>
+        </table>
+    </div>
+    </div>
+</body>
+<footer style="position: relative"class="footer">Copyright by Fredrik</footer>
+
+</html>

@@ -6,17 +6,25 @@ var express = require('express');
 var router = express.Router();
 var database = require('../database.js');
 var passport = require('passport');
+var flash = require('connect-flash');
 var csrf = require("csurf");
 
 var csrfProtection = csrf();
 router.use(csrfProtection);
 
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
+  req.flash('info', "Hej jag är en tjej");  
+  var loginStatus = "Login";
+  if(res.locals.login)
+  {
+    loginStatus = "Logout"
+  }
   // if(sessionStorage.getItem("isLoggedIn") == 1){
   res.render('index', {
     title: 'Project IQ',
-    login: "Logout"
+    login: loginStatus
   });
   req.session.errors = null;
   // }
@@ -24,38 +32,6 @@ router.get('/', function (req, res, next) {
   // res.render('index', { title: 'Project IQ', login: "Login" });        
   // }
 });
-
-router.get("/login", function (req, res) {
-  // if(sessionStorage.getItem("isLoggedIn") == 1){
-
-  // }
-  // else {
-  res.render("login", {
-    title: 'Login'
-  });
-  // }
-});
-
-// router.post("/redirect", (req, res) => {
-//     var data = {};
-
-//     data.sql = `SELECT id FROM Users
-//     WHERE email = ? AND pass = ?;`;  
-//     data.param = [req.body.email, req.body.password];
-
-//     database.queryPromise(data.sql, data.param)
-//         .then((result) => {
-//           let theResult = result.shift();
-//           if(theResult.id == 1) {
-//             console.log("result är 1");
-//             res.redirect("/");
-//           }
-//           res.redirect(`/`);
-//         })
-//         .catch((err) => {
-//           throw err;
-//         });
-//   });
 
 router.get("/about", function (req, res) {
   res.render("about", {
@@ -69,49 +45,48 @@ router.get("/contact", function (req, res) {
   });
 });
 
-router.get("/login/register", function (req, res) {
-  var messages = req.flash('error');
-  res.render("register", {
-    title: "Register",
-    success: req.session.success,
-    errors: req.session.errors,
-    csrfToken: req.csrfToken(),
-    messages: messages,
-    hasErrors: messages.isLength > 0
-  });
-  req.session.success = null;
-});
-
 // router.post("/registered", passport.authenticate("local-signup", {
 //   successRedirect: "/profile",
 //   failuerRedirect: "/login/register",
 //   failureFlash: true
 // }));
 
-router.post("/register", (req, res, next) => {
-  var data = {};
 
-  req.check('email', 'Invalid email address').isEmail();
-  req.check('password', 'Password is not valid').isLength({
-    min: 4
-  }).equals(req.body.passwordCheck);
-  req.check('userType', "Must pick a user").notEmpty();
 
-  console.log("WARNING ------------- STAGE 1");
+router.get("/register", function (req, res) {
+	var messages = req.flash('error');
+	res.render("register", {
+		title: "Register",
+		success: req.session.success,
+		errors: req.session.errors,
+		csrfToken: req.csrfToken(),
+		messages: messages,
+		hasErrors: messages.isLength > 0
+	});
+	req.session.success = null;
+});
 
-  var errors = req.validationErrors();
-  if (errors) {
-    req.session.errors = errors;
-    req.session.success = false;
-    res.redirect('/login/register');
-  } else {
-    next();
-  }
+router.post("/registering", (req, res, next) => {
+
+	req.check('email', 'Invalid email address').isEmail();
+	req.check('password', 'Password is not valid').isLength({
+		min: 4
+	}).equals(req.body.passwordCheck);
+	req.check('userType', "Must pick a user").notEmpty();
+	var errors = req.validationErrors();
+	if (errors) {
+		req.session.errors = errors;
+		req.session.success = false;
+		res.redirect('/user/register');
+	} else {
+		next();
+	}
 }, passport.authenticate("local-signup", {
-  successRedirect: "/profile",
-  failuerRedirect: "/login",
-  failureFlash: true
+	successRedirect: '/user/login',
+	failureRedirect: '/register',
+	failureFlash: true
 }));
+
 
 
 module.exports = router;

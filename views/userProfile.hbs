@@ -9,24 +9,25 @@
 
 <body>
   <div class="header">
-    <a href="/">
+    <a href="/user/profile/">
       <img class="logo animated rotation" id="testLogo" src="/images/projectiq_noshadow.png">
     </a>
     <div class="menu">
       <table>
         <tr>
           <td>
-            <a class="menuEntry slideDown" href="/about/" id="idAbout">About us</a>
+            <a class="menuEntry slideDown" href="/user/addProject/" id="idAbout">Add projects</a>
           </td>
           <td>
-            <a class="menuEntry slideDown" href="/contact/" id="idContact">Contact</a>
+            <a class="menuEntry slideDown" href="/user/projects/" id="idContact">Projects</a>
           </td>
           <td>
-            <a class="menuEntry slideDown" href="/user/{{ login }}/" id="login">{{ login }}</a>
+            <a class="menuEntry slideDown" href="/user/logout/" id="logout">{{ login }}</a>
           </td>
         </tr>
       </table>
     </div>
+      <!--<p class="currentUser" >Currently logged in as "{{ currentUser }}"</p>-->
   </div>
   </div>
   <div class="bgColor">
@@ -42,7 +43,7 @@
       </tr>
       <tr>
         <td>
-          <p class="slideUp">Welcome to {{ title }}</p>
+          <p class="slideUp">Welcome {{ currentUser }}</p>
         </td>
       </tr>
     </table>

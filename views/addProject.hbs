@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ title }}</title>
+  <link rel='stylesheet' href='/css/style.css' />
+  <script src="js/rotate.js"></script>
+</head>
+
+<body>
+  <div class="header">
+    <a href="/user/profile/">
+      <img class="logo animated rotation" id="testLogo" src="/images/projectiq_noshadow.png">
+    </a>
+    <div class="menu">
+      <table>
+        <tr>
+          <td>
+            <a class="menuEntry slideDown" href="/user/addProject/" id="idAbout">Add projects</a>
+          </td>
+          <td>
+            <a class="menuEntry slideDown" href="/user/projects/" id="idContact">Projects</a>
+          </td>
+          <td>
+            <a class="menuEntry slideDown" href="/user/logout/" id="logout">{{ login }}</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!--<p class="currentUser" >Currently logged in as "{{ currentUser }}"</p>-->
+  </div>
+  </div>
+  {{# if success }}
+  <h1 class="success">Success</h1>
+  {{ else }} {{# if errors }}
+  <section class="error">
+    <ul>
+      {{# each errors }}
+      <li> {{ this.msg }}</li>
+      {{/each }} {{/if}}
+    </ul>
+  </section>
+  {{/if }}
+  <div class="bgColor">
+    <form class="projectForm" action="/user/addingProject" method="post">
+      <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+      <label for="name" class="projectLabel">Name</label>
+      <input class="projectInput" type="text" name="name" id="name" placeholder="Name">
+      <br>
+      <label for="signDate" class="projectLabel">Sign Date</label>
+      <input class="projectInput" type="date" name="signDate" id="signDate">
+      <br>
+      <label for="deadline" class="projectLabel">Deadline</label>
+      <input class="projectInput" type="date" name="deadline" id="deadline">
+      <br>
+      <label for="customer" class="projectLabel">Customer</label>
+      <input class="projectInput" type="text" name="customer" id="customer" placeholder="Customer">
+      <br>
+      <label for="budget" class="projectLabel">Budget</label>
+      <input class="projectInput" type="number" name="budget" id="budget" value="100">
+      <br>
+      <label for="delivery" class="projectLabel">Delivery</label>
+      <input class="projectInput" type="date" name="delivery" id="delivery">
+      <br>
+      <textarea class="projectInput" name="purpose" cols="40" rows="10" placeholder="Purpose: Briefly explain the purpose and goal behind this project"></textarea>
+      <br>
+      <textarea class="projectInput" name="team" cols="40" rows="5" placeholder="Team members: Please use email-adresses"></textarea>
+      <br>
+      <textarea class="projectInput" name="technology" id="technology" cols="40" rows="5" placeholder="Describe the different kind of technologies which have been used, such as programming tools, etc."></textarea>
+      <br>
+      <button class="button" type="submit">Submit</button>
+    </form>
+  </div>
+  </div>
+</body>
+<footer class="footer">Copyright by Fredrik</footer>
+
+</html>

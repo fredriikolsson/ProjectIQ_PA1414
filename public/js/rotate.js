@@ -1,18 +1,18 @@
 /**
  * To move around the image on click.
  */
-(function() {
-    "use strict";
+// (function() {
+//     "use strict";
 
-    var element = document.getElementById("testLogo");
-    console.log(document);
+//     var element = document.getElementById("testLogo");
+//     console.log(document);
 
-    element.addEventListener("mouseover", function() {
+//     element.addEventListener("mouseover", function() {
 
-        element.src="/images/projectiq.png";
+//         element.src="/images/projectiq.png";
 
-        console.log("Image was hovered");
-        console.log(rotation);
-    });
+//         console.log("Image was hovered");
+//         console.log(rotation);
+//     });
 
-}());
+// }());

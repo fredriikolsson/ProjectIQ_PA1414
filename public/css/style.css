@@ -20,6 +20,7 @@ body .bg {
     padding-left: auto;
     padding-right: auto;
     width: 100%;
+    z-index: 1000;
 }
 
 .container {
@@ -38,6 +39,7 @@ body .bg {
     animation-fill-mode: forwards;
     -webkit-animation-fill-mode: forwards;
     animation-iteration-count: 1;
+    z-index: -1000;
   
     
 }
@@ -49,7 +51,7 @@ body .bg {
 .footer {
     background: #00796B none repeat scroll 0% 0%; 
     box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.7);    
-    position: fixed;
+    position: absolute;
     top: 96%;
     height: 50px;
     padding-left: auto;
@@ -123,6 +125,22 @@ a {
     border-bottom: 3px rgb(187, 244, 248, 1) solid;
 }
 
+.currentUser {
+    height: 260px;
+    font-size: 14px;
+    font-style: italic;
+    margin-left: 75%;
+    outline: none;
+    top: 6%;
+    position: fixed;
+    transform: rotateZ(0);
+    transition: 0.5s;
+    border-bottom: 3px solid rgba(0,0,0,0);
+    animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
 .welcomeMessage {
     background: rgba(0, 0, 0, 0);
     margin: auto;
@@ -143,11 +161,35 @@ a {
    
 }
 
+/* .projectsTable {
+    position: static;
+    top:40%;
+    margin: auto;
+    margin-top: 10%;
+    border: 1px solid black;
+ }
+
+.projectsHead {
+    border: 2px solid black;
+}
+.projectsBody td {
+    border:1px solid black;
+} */
+
 p {
     margin: auto;
     font-size: 25px;
     max-width: 700px;
     text-align: center;
+}
+
+.error {
+    background: rgb(240, 127, 127, 0.5);
+    border: 0px solid black;
+    border-radius: 10px;
+    color:rgb(255, 0, 0);
+    list-style-type: none;
+    text-shadow: 0px 0px 1px white;
 }
 
 .loginForm {
@@ -157,9 +199,40 @@ p {
     padding: 10px 10px 10px 10px;
 }
 
+.secretSwitch {
+    width:100%;
+    height:20em;
+    background: 
+}
+
 input {
     padding: 3%;
     margin-top: 1%;
+}
+
+.projectForm
+{
+    position: absolute;
+    margin-top: 5%;
+    margin-left: 37%;
+    text-align: right;
+
+}
+
+.projectInput 
+{
+    margin: auto;
+    padding: 0%;
+    margin-top: 0%;
+    width: 450px;
+    background: white;
+}
+
+.projectLabel
+{
+    font-style: italic;
+    right: 15px;
+    margin-right: 25px;
 }
 
 .loginOptions {
@@ -305,3 +378,162 @@ input {
       transform: rotate3d(1, 2, 1, 360deg);
     }
   }
+
+
+
+.changeOwnership {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 150px;
+    margin-left: 7%;
+    display:block;
+}
+.changeOwnership label
+{
+    display:block;
+}
+.changeTitle{
+    position: absolute;
+    top: -50px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.9);
+    
+}
+.changeOwnership input {
+    margin:0;
+    padding: 1%;
+}
+
+.searchBar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 150px;
+    margin-left: 7%;
+    display:block;
+    width: 450px;
+    border: 1px black solid;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    
+}
+.searchBar input
+{
+    margin:0;
+    padding: 0;
+}
+
+  .projectsTable {
+    background: white;
+    border-radius:3px;
+    border-collapse: collapse;
+    height: 320px;
+    margin: auto;
+    margin-top: 10%;
+    max-width: 800px;
+    padding:5px;
+    width: 100%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    animation: float 5s infinite;
+    position: relative;
+  }
+   
+  .projectsTable th {
+    color:#D5DDE5;;
+    background:#1b1e24;
+    border-bottom:4px solid #9ea7af;
+    border-right: 1px solid #343a45;
+    font-size:23px;
+    font-weight: 100;
+    padding:24px;
+    text-align:left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    vertical-align:middle;
+  }
+  
+  .projectsTable th:first-child {
+    border-top-left-radius:3px;
+  }
+   
+  .projectsTable th:last-child {
+    border-top-right-radius:3px;
+    border-right:none;
+  }
+    
+  .projectsTable tr {
+    border-top: 1px solid #C1C3D1;
+    border-bottom: 1px solid #C1C3D1;
+    color:#666B85;
+    font-size:16px;
+    font-weight:normal;
+    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+  }
+   
+  .projectsTable tr:hover td {
+    background:#7C4DFF;
+    color:#FFFFFF;
+    border-top: 1px solid #22262e;
+  }
+   
+  .projectsTable tr:first-child {
+    border-top:none;
+  }
+  
+  .projectsTable tr:last-child {
+    border-bottom:none;
+  }
+   
+  .projectsTable tr:nth-child(odd) td {
+    background:#EBEBEB;
+  }
+   
+  .projectsTable tr:nth-child(odd):hover td {
+    background:#4E5066;
+  }
+  
+  .projectsTable tr:last-child td:first-child {
+    border-bottom-left-radius:3px;
+  }
+   
+  .projectsTable tr:last-child td:last-child {
+    border-bottom-right-radius:3px;
+  }
+   
+  .projectsTable td {
+    background:#FFFFFF;
+    padding:20px;
+    text-align:left;
+    vertical-align:middle;
+    font-weight:300;
+    font-size:18px;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #C1C3D1;
+  }
+  
+  .projectsTable td:last-child {
+    border-right: 0px;
+  }
+  
+  .projectsTable th.text-left {
+    text-align: left;
+  }
+  
+  .projectsTable th.text-center {
+    text-align: center;
+  }
+  
+  .projectsTable th.text-right {
+    text-align: right;
+  }
+  
+  .projectsTable td.text-left {
+    text-align: left;
+  }
+  
+  .projectsTable td.text-center {
+    text-align: center;
+  }
+  
+  .projectsTable td.text-right {
+    text-align: right;
+  }
+  

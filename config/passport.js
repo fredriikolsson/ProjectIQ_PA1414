@@ -37,7 +37,7 @@ passport.use('local-signup', new LocalStrategy({
             return done(err);
         if (rows.length) {
             return done(null, false, {
-                message: 'That email is already taken.'
+                'message': 'That email is already taken.'
             });
         } else {
             var newUser = new Object();
@@ -46,10 +46,10 @@ passport.use('local-signup', new LocalStrategy({
             newUser.userType = req.body.userType;
             connection.query(`INSERT INTO Users(email, password, userType) 
                             VALUES('` + newUser.email + `','` + newUser.password + `','` + newUser.userType + `')`,
-                function (error){
-                        return done(null, newUser);
-                    }
-                );
+                function (error) {
+                    return done(null, newUser);
+                }
+            );
         }
     });
 }));
@@ -61,17 +61,18 @@ passport.use('local-login', new LocalStrategy({
         passReqToCallback: true // allows us to pass back the entire request to the callback
     },
     function (req, email, password, done) { // callback with email and password from our form
-
-        connection.query("SELECT * FROM `users` WHERE `email` = '" + email + "'", function (err, rows) {
+        req.checkBody('email', 'Invalid email').notEmpty().isEmail();
+        req.checkBody('password', 'Invalid password').notEmpty();
+        connection.query("SELECT * FROM `Users` WHERE `email` = '" + email + "'", function (err, rows) {
             if (err)
                 return done(err);
             if (!rows.length) {
-                return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                return done(null, false, req.flash('message', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
             }
 
             // if the user is found but the password is wrong
-            if (!(rows[0].password == password))
-                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+            if (!(bcrypt.compareSync(password, rows[0].password)))
+                return done(null, false, req.flash('message', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
             return done(null, rows[0]);
@@ -79,6 +80,14 @@ passport.use('local-login', new LocalStrategy({
         });
 
     }));
+
+module.exports.requireRole = function (role) {
+    return function (req, res, next) {
+        if (req.user && req.user.role === role) next();
+        else
+            res.send(404);
+    }
+}
 
 
 // bcrypt.compareSync(password, this.password) ???????

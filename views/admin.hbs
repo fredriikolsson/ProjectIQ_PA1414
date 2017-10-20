@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <script src="js/rotate.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <a href="/user/profile/">
+            <img class="logo animated rotation" id="testLogo" src="/images/projectiq_noshadow.png">
+        </a>
+        <div class="menu">
+            <table>
+                <tr>
+                    <td>
+                        <a class="menuEntry slideDown" href="/user/logout/" id="logout">{{ login }}</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--<p class="currentUser" >Currently logged in as "{{ currentUser }}"</p>-->
+    </div>
+    </div>
+    <div class="bgColor">
+        <img class="bg" src="/images/intro.jpg">
+        <div class="changeOwnership">
+            <p class="changeTitle">Add owner</p>
+            <form action="/user/changeOwner" method="post">
+                <label for="toChange">Which project ID to change</label>
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <input type="number" name="toChange" placeholder="0">
+                <br>
+                <input type="email" name="toAdd" placeholder="E-Mail to add">
+                <br>
+                <button size="100" type="submit">Add</button>
+            </form>
+        </div>
+        <table class="textTable sldideUp">
+            <tr>
+                <td>
+                    <p class="slideUp">Welcome admin {{ currentUser }}</p>
+                    <table style="margin-left: 0%;" class="projectsTable">
+                        <thead class="projectsHead">
+                            <th class="projectsHead">Users</th>
+                            <th class="projectsHead">User Type</th>
+                        </thead>
+                        <tbody class="projectsBody">
+                            {{# each user }}
+                            <tr>
+                                <td>{{ this.email }}</td>
+                                <td>{{ this.userType }}</td>
+                            </tr>
+                            {{/each }}
+                        </tbody>
+                    </table>
+                    <table sytle="margin-left: -10%;" class="projectsTable">
+                        <thead class="projectsHead">
+                            <th class="projectsHead">ID</th>
+                            <th class="projectsHead">Name</th>
+                            <th class="projectsHead">Customer</th>
+                            <th class="projectsHead">Team</th>
+                            <th class="projectsHead">Owners</th>
+                        </thead>
+                        <tbody class="projectsBody">
+                            {{# each projects }}
+                            <tr>
+                                <td>{{ this.id }}</td>
+                                <td>{{ this.name }}</td>
+                                <td>{{ this.customer }}</td>
+                                <td>{{ this.team }}</td>
+                                <td>{{ this.owners }}</td>
+                            </tr>
+                            {{/each }}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </div>
+</body>
+<footer style="position: relative; margin-top: 10%;" class="footer">Copyright by Fredrik</footer>
+
+</html>

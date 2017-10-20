@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/css/style.css' />
+    <script src="js/rotate.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <a href="/user/profile/boss">
+            <img class="logo animated rotation" id="testLogo" src="/images/projectiq_noshadow.png">
+        </a>
+        <div class="menu">
+            <table>
+                <tr>
+                    <td>
+                        <a class="menuEntry slideDown" href="/user/logout/" id="logout">{{ login }}</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--<p class="currentUser" >Currently logged in as "{{ currentUser }}"</p>-->
+    </div>
+    </div>
+    <div class="bgColor">
+        <img class="bg" src="/images/intro.jpg">
+        <div class="searchBar">
+            <form action="/user/search" method="post">
+                <label for="toChange">Search</label>
+                <select name="category">
+                    <option value="id">ID</option>
+                    <option value="name">Name</option>
+                    <option value="signDate">Sign date</option>
+                    <option value="deadline">Deadline</option>
+                    <option value="customer">Customer</option>
+                    <option value="budget">Budget</option>
+                    <option value="delivery">Delivery</option>
+                    <option value="purpose">Purpose</option>
+                    <option value="team">Team</option>
+                    <option value="technology">Technology</option>
+                </select>
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <input type="text" name="searchPhrase">
+                <button size="100" type="submit">Search</button>
+            </form>
+        </div>
+        <table class="textTable sldideUp">
+            <tr>
+                <td>
+                    <p class="slideUp">Salute boss {{ currentUser }}</p>
+                    <table sytle="margin-left: -10%;" class="projectsTable">
+                        <thead class="projectsHead">
+                            <th class="projectsHead">ID</th>
+                            <th class="projectsHead">Name</th>
+                            <th class="projectsHead">Sign Date</th>
+                            <th class="projectsHead">Deadline</th>
+                            <th class="projectsHead">Customer</th>
+                            <th class="projectsHead">Budget</th>
+                            <th class="projectsHead">Delivery</th>
+                            <th class="projectsHead">Purpose and goal</th>
+                            <th class="projectsHead">Team</th>
+                            <th class="projectsHead">Technology</th>
+                            <th class="projectsHead">Owners</th>
+                        </thead>
+                        <tbody class="projectsBody">
+                            {{# each projects }}
+                            <tr>
+                                <td>{{ this.id }}</td>
+                                <td>{{ this.name }}</td>
+                                <td>{{ this.signDate }}</td>
+                                <td>{{ this.deadline }}</td>
+                                <td>{{ this.customer }}</td>
+                                <td>{{ this.budget }}</td>
+                                <td>{{ this.delivery }}</td>
+                                <td>{{ this.purpose }}</td>
+                                <td>{{ this.team }}</td>
+                                <td>{{ this.technology }}</td>
+                                <td>{{ this.owners }}</td>
+                            </tr>
+                            {{/each }}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </div>
+</body>
+<footer style="position: relative; margin-top: 10%;" class="footer">Copyright by Fredrik</footer>
+
+</html>

@@ -96,9 +96,16 @@ router.get('/projects', isLoggedIn, isUser, (req, res, next) => {
 		projects = results;
 		res.render('projects', {
 			login: "Logout",
+			csrfToken: req.csrfToken(),			
 			projects: projects
 		});
 	});
+});
+
+router.post('/remove', isLoggedIn, isUser, (req, res, next) => {
+	console.log(res.body.row);
+
+	res.redirect('/user/projects');
 });
 
 router.get('/profile/admin', isLoggedIn, isAdmin, (req, res, next) => {
@@ -199,13 +206,14 @@ router.get("/logout", isLoggedIn, function (req, res, next) {
 });
 
 router.use("/", notLoggedIn, function (req, res, next) {
+	console.log("What?");
 	next();
 });
 /* GET users listing. */
 
 router.get("/login", function (req, res) {
 
-	var messages = req.flash('error');
+	var messages = req.flash('message');
 
 	req.check('email', 'Invalid email address').isEmail();
 	req.check('password', 'Password is not valid').isLength({
@@ -225,6 +233,7 @@ router.post("/redirect", passport.authenticate('local-login', {
 	failureRedirect: "/user/login",
 	failureFlash: true
 }), (req, res) => {
+	console.log(req.user.userType === "admin");
 	if (req.user.userType === "admin") {
 		res.redirect('/user/profile/admin');
 	}
@@ -268,7 +277,7 @@ function isAdmin(req, res, next) {
 		console.log("Is admin");
 		return next();
 	}
-	res.redirect("/");
+	res.redirect("/profile/admin");
 }
 
 function isBoss(req, res, next) {
@@ -276,5 +285,5 @@ function isBoss(req, res, next) {
 		console.log("Is boss");
 		return next();
 	}
-	res.redirect("/");
+	res.redirect("/profile/boss");
 }

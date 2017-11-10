@@ -1,5 +1,4 @@
 "use strict";
-// FIXA MESSAGES FLASH GREJEN KOLLA VIDEON
 var passport = require('passport');
 var mysql = require('mysql');
 var LocalStrategy = require('passport-local').Strategy;
@@ -18,11 +17,14 @@ var options = {
 connection = mysql.createConnection(options);
 
 passport.serializeUser(function (user, done) {
-    done(null, user.id);
+    console.log("Serialize: " + user.email);
+    done(null, user.email);
+    console.log("Done seralizing");
 });
 
-passport.deserializeUser(function (id, done) {
-    connection.query("select * from Users where id = " + id, function (err, rows) {
+passport.deserializeUser(function (email, done) {
+    connection.query("select * from Users where email = '" + email + "'", function (err, rows) {
+        console.log("Rows[0] for some reason: " + rows);
         done(err, rows[0]);
     });
 });
@@ -36,9 +38,11 @@ passport.use('local-signup', new LocalStrategy({
         if (err)
             return done(err);
         if (rows.length) {
-            return done(null, false, {
-                'message': 'That email is already taken.'
-            });
+            console.log("It's an error, trying to set message");
+            return done(null, false, req.flash('message', 'That email is already taken.') //{
+                //        'message': 'That email is already taken.'
+                //    }
+            );
         } else {
             var newUser = new Object();
             newUser.email = email;
@@ -79,7 +83,35 @@ passport.use('local-login', new LocalStrategy({
 
         });
 
-    }));
+    })
+);
+
+passport.use('local-change', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true // allows us to pass back the entire request to the callback
+}, function (req, email, password, done) {
+    connection.query("select * from Users where email = '" + email + "'", function (err, rows) {
+        if (err)
+            return done(err);
+        if (!rows.length) {
+            return done(null, false, req.flash('message', 'That email does not exist.') //{
+                //        'message': 'That email is already taken.'
+                //    }
+            );
+        } else {
+            var newUser = new Object();
+            newUser.email = email;
+            newUser.password = bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
+            newUser.userType = req.body.userType;
+            connection.query(`UPDATE Users SET password = '` + newUser.password + `' WHERE email = '` + newUser.email + `';`,
+                function (error) {
+                    return done(null, newUser);
+                }
+            );
+        }
+    });
+}));
 
 module.exports.requireRole = function (role) {
     return function (req, res, next) {

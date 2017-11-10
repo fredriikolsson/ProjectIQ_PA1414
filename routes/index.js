@@ -54,7 +54,7 @@ router.get("/contact", function (req, res) {
 
 
 router.get("/register", function (req, res) {
-	var messages = req.flash('error');
+	var messages = req.flash('message');
 	res.render("register", {
 		title: "Register",
 		success: req.session.success,
@@ -73,20 +73,57 @@ router.post("/registering", (req, res, next) => {
 		min: 4
 	}).equals(req.body.passwordCheck);
 	req.check('userType', "Must pick a user").notEmpty();
+	console.log(typeof(req.body.userType));
+	req.check('userType', "Need to contact system administrator at <fredde665@gmail.com> to register as Admin").equals("boss");
+	req.check('userType', "Need to contact system administrator at <fredde665@gmail.com> to register as Boss").equals("admin");
+	
 	var errors = req.validationErrors();
 	if (errors) {
 		req.session.errors = errors;
 		req.session.success = false;
-		res.redirect('/user/register');
+		res.redirect('/register');
 	} else {
 		next();
 	}
 }, passport.authenticate("local-signup", {
-	successRedirect: '/user/login',
+	successRedirect: '/user/profile',
 	failureRedirect: '/register',
 	failureFlash: true
 }));
 
+router.get("/forgot", function (req, res) {
+	var messages = req.flash('message');
+	res.render("forgot", {
+		title: "Forgot Password",
+		success: req.session.success,
+		errors: req.session.errors,
+		csrfToken: req.csrfToken(),
+		messages: messages,
+		hasErrors: messages.isLength > 0
+	});
+	req.session.success = null;
+});
+
+router.post("/change", (req, res, next) => {
+
+	req.check('email', 'Invalid email address').isEmail();
+	req.check('password', 'Password is not valid').isLength({
+		min: 4
+	}).equals(req.body.passwordCheck);
+	
+	var errors = req.validationErrors();
+	if (errors) {
+		req.session.errors = errors;
+		req.session.success = false;
+		res.redirect('/forgot');
+	} else {
+		next();
+	}
+}, passport.authenticate("local-change", {
+	successRedirect: '/user/profile',
+	failureRedirect: '/forgot',
+	failureFlash: true
+}));
 
 
 module.exports = router;

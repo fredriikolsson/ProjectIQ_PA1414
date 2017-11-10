@@ -65,6 +65,12 @@
                             <td>{{ this.purpose }}</td>
                             <td>{{ this.team }}</td>
                             <td>{{ this.technology }}</td>
+                            <form class="removeButton" method="post" action="/user/remove">
+                                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                                <td>
+                                    <button name="Remove" type="submit">Remove</button>
+                                </td>
+                            </form>
                         </tr>
                         {{/each }}
                     </tbody>
@@ -74,6 +80,6 @@
     </div>
     </div>
 </body>
-<footer style="position: relative"class="footer">Copyright by Fredrik</footer>
+<footer style="position: relative" class="footer">Copyright by Fredrik</footer>
 
 </html>

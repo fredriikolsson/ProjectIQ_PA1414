@@ -11,9 +11,9 @@ Continue to install the MySQL-client
 
 In Debian-based Linux Distros
 ```bash
-   $ sudo apt-get update
-   $ sudo apt-get install mysql-server
-   $ mysql_secure_installation
+$ sudo apt-get update
+$ sudo apt-get install mysql-server
+$ mysql_secure_installation
 ```
 
 For other operating systems [Click Here to get to the offical MySQL website to download](https://dev.mysql.com/downloads/mysql/ "MySQL Download Page")

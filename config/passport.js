@@ -1,4 +1,5 @@
 "use strict";
+var dbPassword = require('../dbPassword');
 var passport = require('passport');
 var mysql = require('mysql');
 var LocalStrategy = require('passport-local').Strategy;
@@ -9,7 +10,7 @@ var connection = null;
 var options = {
     host: 'localhost',
     user: 'root',
-    password: 'falukorv',
+    password: dbPassword.dbPassword,
     database: 'piq',
     multipleStatements: true
 };

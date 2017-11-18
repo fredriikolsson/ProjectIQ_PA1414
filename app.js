@@ -1,3 +1,4 @@
+var dbPassword = require('./dbPassword');
 var express = require('express');
 var hbs = require('express-handlebars');
 var path = require('path');
@@ -29,7 +30,7 @@ var connection = null;
 var options = {
 	host: 'localhost',
 	user: 'root',
-	password: 'falukorv',
+	password: dbPassword.dbPassword,
 	database: 'piq',
 	multipleStatements: true
 };

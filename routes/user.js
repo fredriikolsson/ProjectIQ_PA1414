@@ -1,3 +1,4 @@
+var dbPassword = require('../dbPassword');
 var express = require('express');
 var router = express.Router();
 var database = require('../database.js');
@@ -10,11 +11,11 @@ var app = require("../app.js");
 var csrfProtection = csrf();
 
 var connection = null;
-var mysql = require("mysql")
+var mysql = require("mysql");
 var options = {
 	host: 'localhost',
 	user: 'root',
-	password: 'falukorv',
+	password: dbPassword.dbPassword,
 	database: 'piq',
 	multipleStatements: true
 };

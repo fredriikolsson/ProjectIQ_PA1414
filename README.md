@@ -6,7 +6,7 @@ By Fredrik Olsson
 Start by downloading and installing NodeJS
 [NodeJS webpage](https://nodejs.org/en/ "NodeJS Hompeage")
 
-When NodeJS is finnished and propperly installed 
+When NodeJS is finnished and properly installed 
 Continue to install the MySQL-client
 
 In Debian-based Linux Distros

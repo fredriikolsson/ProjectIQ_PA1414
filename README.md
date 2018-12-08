@@ -41,4 +41,4 @@ On Windows, use this command:
 ```
 Then load http://localhost:3000/ in your browser to access the app.
 
-### If above is note working please contact me at `fredde665@gmail.com`
+### If above is not working please contact me at `fredde665@gmail.com`
